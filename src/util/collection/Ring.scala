@@ -1,6 +1,6 @@
-package util
+package util.collection
 
-import exceptions.EmptyRingException
+import util.exception.EmptyRingException
 
 case class Ring[T](val left: List[T], val right: List[T]) {
   if (right == List()) {
@@ -8,20 +8,20 @@ case class Ring[T](val left: List[T], val right: List[T]) {
       throw EmptyRingException
     else reset
   }
-     
+  
   def shift = right match {
     case u :: List() => reset
-    case _ => Ring(left :+ right.head, right.tail)
+    case _ => Ring(right.head :: left, right.tail)
   }
   
   def unshift = left match {
-    case List() => Ring(right.init, right.last +: List())
-    case _ => Ring(left.init, left.last +: right)
+    case List() => Ring(right.init.reverse, right.last :: List())
+    case _ => Ring(left.tail, left.head :: right)
   }
   
-  private def reset = Ring(left ::: right)
+  private def reset = Ring(left.reverse ::: right)
   
-  def toList = right ::: left
+  def toList = right ::: left.reverse
   
   def insert(t: T) = Ring(left, t :: right)
   
@@ -29,10 +29,7 @@ case class Ring[T](val left: List[T], val right: List[T]) {
     right.head
   }
   
-  def change(f: T => T) = {
-    val t :: ts = right
-    Ring(left, f(t) :: ts)
-  }
+  def change(f: T => T) = Ring(left, f(right.head) :: right.tail)
   
   def map[U](f: T => U) = Ring(left map (f(_)), right map (f(_)))
   

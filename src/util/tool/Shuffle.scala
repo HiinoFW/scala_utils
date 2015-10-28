@@ -1,7 +1,8 @@
-package util
+package util.tool
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
+import util.Random
 
 object Shuffle {
 	def apply[T](input: T*) = {

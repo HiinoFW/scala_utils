@@ -1,4 +1,4 @@
-package util.tools
+package util.tool
 
 object IO {
   def using[A <: { def close(): Unit }, B](param: A)(f: A => B): B =
