@@ -3,19 +3,19 @@ package util
 import scala.annotation.tailrec
 
 trait Pondered[T] {
-	class Ponderation(val pnd: Int, val item: T) extends Tuple2[Long, T](pnd, item)
+	class Ponderation(val pnd: Double, val item: T) extends Tuple2[Double, T](pnd, item)
 	
 	var items: Seq[Ponderation] = Seq()
-	var size = 0
-	var ptr = (0, -1)
+	var size = 0D
+	var ptr = (0D, -1)
 	
-	def add(i: Int, item: T) {
+	def add(i: Double, item: T) {
 		size += i
 		items = items :+ new Ponderation(i, item)
 	}
 	
 	@tailrec
-	private def rec_fetch(i: Int): T = {
+	private def rec_fetch(i: Double): T = {
 		if (i < ptr._1) {
 			ptr = (ptr._1 - i, ptr._2)
 			items(ptr._2).item
@@ -28,16 +28,12 @@ trait Pondered[T] {
 		}
 	}
 	
-	def fetch(i: Int): T = {
+	def fetch(i: Double): T = {
 		rec_fetch(i % size)
-	}
-	
-	def fetch(i: Long): T = {
-		rec_fetch(i % size toInt)
 	}
 
 	def reset {
-		ptr = (0, -1)
+		ptr = (0D, -1)
 	}
 
 	def get: T

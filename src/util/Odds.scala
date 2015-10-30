@@ -2,5 +2,5 @@ package util
 
 class Odds[T] extends Pondered[T] {
 	def get: T =
-		fetch(Random.get.nextInt(size))
+		fetch(size * scala.util.Random.nextDouble)
 }
