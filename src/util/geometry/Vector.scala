@@ -1,13 +1,7 @@
 package util.geometry
 
 class Vector(val system: CoordSystem)(val dx: Double, val dy: Double) {
-  val (dxAbs, dyAbs) = system match {
-    case BaseCoordSystem => (dx, dy)
-    case default => (
-      dx * system.i.dx + dy * system.j.dx,
-      dx * system.i.dy + dy * system.j.dy
-    )
-  }
+  val (dxAbs, dyAbs) = system getAbsOfVector (dx, dy)
     
   val coords = (dx, dy)
   val coordsAbs = (dxAbs, dyAbs)

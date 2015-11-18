@@ -1,7 +1,7 @@
 package util.geometry
 
 class Point(val system: CoordSystem)(val x: Double, val y: Double) {
-  val (xAbs, yAbs) = system getAbsOf (x, y)
+  val (xAbs, yAbs) = system getAbsOfPoint (x, y)
   
   val coords = (x, y)
   def rel = Point(coords)

@@ -21,15 +21,28 @@ abstract class CoordSystem {
   val i: Vector
   val j: Vector
   
-  def getAbsOf(x: Double, y: Double): (Double, Double) = this match {
+  def getAbsOfPoint(x: Double, y: Double): (Double, Double) = this match {
     case BaseCoordSystem => (x, y)
     case default => {
       val (oxa, oya) = o.coordsAbs
       val (ixa, iya) = i.coordsAbs
       val (jxa, jya) = j.coordsAbs
-      system getAbsOf (
+      system getAbsOfPoint (
         x * ixa + y * jxa + oxa,
         x * iya + y * jya + oya
+      )
+    }
+  }
+  
+  def getAbsOfVector(dx: Double, dy: Double): (Double, Double) = this match {
+    case BaseCoordSystem => (dx, dy)
+    case default => {
+      val (oxa, oya) = o.coordsAbs
+      val (ixa, iya) = i.coordsAbs
+      val (jxa, jya) = j.coordsAbs
+      system getAbsOfVector (
+        dx * ixa + dy * jxa,
+        dx * iya + dy * jya
       )
     }
   }
