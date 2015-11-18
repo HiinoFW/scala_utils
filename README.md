@@ -19,10 +19,12 @@ Simply download the file <code>scala_utils.jar</code> in the <code>out</code> fo
     - exception - contains custom exceptions
         - EmptyRingException - thrown when trying to create a Ring with no values inside
         - EndOfZipperException - (unused yet) thrown when trying to read past the end points of a zipper
+        - BadCoordSystemException - thrown when trying to create a CoordSystem with parallel or null vectors
     - geometry - contains basic classes for geometry
-        - Point [immutable] - 2D point
-        - Rect [immutable] - 2D rectangle
-        - Vector [immutable] - 2D vector
+        - CoordSystem [immutable] - class describing a cartesian coordinate system for the plane
+        - BaseCoordSystem [immutable] - object describing the default coordinate system, origin (0, 0) and vectors (1, 0) and (0, 1)
+        - Point [immutable] - point on the plane, described relatively to a coordinate system (base system by default)
+        - Vector [immutable] - vector on the plane, described relatively to a coordinate system (base system by default)
     - tool - contains various, more specific functions
         - DeclineZipper - very specific function that returns a list of all possible zipper states from a list passed as an argument
         - IO - functions for reading and using files
